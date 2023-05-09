@@ -1,0 +1,91 @@
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+}
+ul {
+  list-style-type: none;
+  display: flex;
+  width: 50%;
+  justify-content: space-evenly;
+  padding: 15px 0px;
+  background-color: bisque;
+  margin: 30px auto;
+}
+body {
+  background-color: black;
+}
+/* form styling */
+.form-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.form-container {
+  margin: auto;
+  padding: 20px;
+  background-color: bisque;
+  width: 30%;
+}
+.form-container input {
+  margin: 7px 0px;
+}
+form {
+  margin: auto;
+  width: 35%;
+}
+form {
+  font-size: 20px;
+}
+form button {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  width: 55%;
+  margin-left: 20px;
+}
+img {
+  width: 100px;
+  margin: 5px 0px;
+}
+ul {
+  width: 30%;
+}
+.post {
+  font-size: 19px;
+  display: flex;
+  flex-direction: column;
+}
+.deleteUpdate {
+  margin-bottom: 9px;
+  margin-top: 6px;
+  font-size: 10px;
+  /* background-color: black; */
+}
+.delete {
+  margin-right: 7px;
+  background-color: black;
+  color: white;
+}
+.update {
+  background-color: black;
+  color: white;
+}
+.deleteUpdate a {
+  padding: 3px;
+  border: 2px solid white;
+}
+.formUpdate {
+  background-color: bisque;
+  padding: 20px 0px;
+}
+.formUpdate div {
+  width: 60%;
+  margin: auto;
+}
+div input {
+  width: 100%;
+}
+.update {
+  margin-top: 10px;
+}

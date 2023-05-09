@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    {{> navbar}}
+    <ul>
+        
+        <div class="post">
+            {{#each posts as |post|}}
+            <li>Title: {{post.title}}</li>
+            <img src="{{post.imageUrl}}" alt="image">
+            <li class="description">Description: {{post.description}}</li>
+            <div class="deleteUpdate">
+            <a href="/post/deletePost?id={{post._id}}" class="delete">Delete Post</a>
+            <a href="/post/updatePost?id={{post._id}}" class="update">Update Post</a>
+            </div>
+            {{/each}}
+        </div>
+        
+    </ul>
+</body>
+</html>

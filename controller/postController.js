@@ -1,0 +1,50 @@
+const { Dbclass } = require("../models/dbclass");
+module.exports.getPost = async (req, res) => {
+  try {
+    let data = await Dbclass.getPosts();
+    res.render("posts", {
+      posts: data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports.getAddPost = (req, res) => {
+  res.render("addPostform");
+};
+module.exports.postAddPost = (req, res) => {
+  //first add the post
+  let { title, imageUrl, description } = req.body;
+  //add data to database
+  let newPost = new Dbclass(title, imageUrl, description);
+  newPost
+    .save()
+    .then((data) => {
+      res.redirect("/post");
+    })
+    .catch((Er) => {
+      console.log(Er);
+    });
+};
+module.exports.getDeletePost = async (req, res) => {
+  let id = req.query.id;
+  let data = await Dbclass.deletePost(id);
+  res.render("posts", {
+    posts: data,
+  });
+};
+module.exports.getUpdatePost = async (req, res) => {
+  let id = req.query.id;
+  let data = await Dbclass.getPost(id);
+  res.render("updatePostform", {
+    data,
+  });
+};
+module.exports.postUpdatePost = async (req, res) => {
+  let obj = req.body;
+  let data = await Dbclass.updatePost(obj);
+  res.render("posts", {
+    posts: data,
+  });
+};
