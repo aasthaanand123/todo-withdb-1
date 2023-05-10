@@ -35,16 +35,47 @@ module.exports.getDeletePost = async (req, res) => {
   });
 };
 module.exports.getUpdatePost = async (req, res) => {
-  let id = req.query.id;
-  let data = await Dbclass.getPost(id);
-  res.render("updatePostform", {
-    data,
-  });
+  try {
+    let id = req.query.id;
+    let data = await Dbclass.getPost(id);
+    res.render("updatePostform", {
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 module.exports.postUpdatePost = async (req, res) => {
-  let obj = req.body;
-  let data = await Dbclass.updatePost(obj);
-  res.render("posts", {
-    posts: data,
-  });
+  try {
+    let obj = req.body;
+    let data = await Dbclass.updatePost(obj);
+    res.render("posts", {
+      posts: data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+module.exports.openPost = async (req, res) => {
+  try {
+    let id = req.query.id;
+    let post = await Dbclass.getPost(id);
+
+    res.render("FullpgWithComments", {
+      post,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+module.exports.submitComment = async (req, res) => {
+  try {
+    let { comment, id } = req.body;
+    let post = await Dbclass.postComment(comment, id);
+    res.render("FullpgWithComments", {
+      post,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };

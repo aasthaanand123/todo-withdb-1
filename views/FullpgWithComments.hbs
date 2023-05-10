@@ -1,0 +1,28 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="postWithCom">
+      <div>Title: {{post.title}}</div>
+      <img src="{{post.imageUrl}}" alt="image" />
+      <div>Description: {{post.description}}</div>
+      <div class="comments">
+        <form action="/post/submitComment" method="post" class="commentForm">
+          <input type="text" placeholder="Write a comment" name="comment" />
+          <input type="hidden" value="{{post._id}}" name="id" />
+          <button type="submit">Submit</button>
+        </form>
+        <ul class="comment">
+          {{#each post.comments as |comment|}}
+            <li>{{comment}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

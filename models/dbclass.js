@@ -7,11 +7,29 @@ class Dbclass {
   constructor(title, imageUrl, description) {
     (this.title = title),
       (this.imageUrl = imageUrl),
+      //how to set this field as an empty array?
       (this.description = description);
   }
   //to save a particular post
   save() {
-    return getDb().collection(collectionName).insertOne(this);
+    return new Promise(async (res, rej) => {
+      let db = getDb().collection(collectionName);
+      try {
+        await db.insertOne(this);
+        let data = await db.updateOne(
+          { _id: new ObjectId(this.id) },
+          {
+            $set: {
+              comments: [],
+            },
+          }
+        );
+        res(data);
+      } catch (err) {
+        console.log(err);
+        rej(err);
+      }
+    });
   }
   static getPosts() {
     return new Promise(async (res, rej) => {
@@ -39,7 +57,7 @@ class Dbclass {
     return new Promise(async (res, rej) => {
       let db = getDb().collection(collectionName);
       try {
-        let data = db.findOne({ _id: new ObjectId(id) });
+        let data = await db.findOne({ _id: new ObjectId(id) });
         res(data);
       } catch (err) {
         console.log(err);
@@ -48,9 +66,9 @@ class Dbclass {
   }
   static updatePost(obj) {
     return new Promise(async (res, rej) => {
-      let db = await getDb().collection(collectionName);
+      let db = getDb().collection(collectionName);
       try {
-        db.updateOne(
+        await db.updateOne(
           { _id: new ObjectId(obj.id) },
           {
             $set: {
@@ -60,10 +78,45 @@ class Dbclass {
             },
           }
         );
-        let data = db.find({}).toArray();
+        let data = await db.find({}).toArray();
         res(data);
       } catch (err) {
         rej(err);
+      }
+    });
+  }
+  static postComment(comment, id) {
+    return new Promise(async (res, rej) => {
+      let db = getDb().collection(collectionName);
+      try {
+        let post = await db.findOne({ _id: new ObjectId(id) });
+        console.log(post);
+        let comments; //returns an obj
+        if (post.comments == null || typeof post.comments == "number") {
+          comments = [comment]; //if no element add el
+          await db.updateOne(
+            //update nevertheless
+            { _id: new ObjectId(id) },
+            {
+              $set: {
+                comments: comments,
+              },
+            }
+          );
+        } else {
+          await db.updateOne(
+            { _id: new ObjectId(id) },
+            {
+              $push: { comments: comment },
+            }
+          );
+          //if already element, push new element
+        }
+        let d = await db.findOne({ _id: new ObjectId(id) });
+        console.log(d);
+        res(d);
+      } catch (err) {
+        console.log(err);
       }
     });
   }
