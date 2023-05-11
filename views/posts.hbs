@@ -9,6 +9,8 @@
 </head>
 <body>
     {{> navbar}}
+    {{#if posts}} 
+    {{!-- if no posts available then no blank space is reserved --}}
     <ul class="ul_post">
         
         <div class="post">
@@ -23,8 +25,10 @@
             <a href="/post/updatePost?id={{post._id}}" class="update">Update Post</a>
             </div>
             {{/each}}
+
         </div>
         
     </ul>
+    {{/if}}
 </body>
 </html>

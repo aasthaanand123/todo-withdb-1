@@ -165,3 +165,30 @@ body {
   overflow-x: hidden;
   /* for now for styling purposes */
 }
+.loginForm {
+  margin: 10% auto;
+  width: 24%;
+  height: 30%;
+  background-color: bisque;
+  padding: 5px;
+}
+.inputfield {
+  width: 55%;
+  margin: 5px auto;
+}
+.inputfield input {
+  margin: 5px;
+}
+.loginbtn {
+  display: block;
+  width: 30%;
+  margin: auto;
+}
+.logintitle {
+  width: 49%;
+  margin: auto;
+  font-size: 30px;
+}
+.formdiv {
+  margin: 50px auto;
+}

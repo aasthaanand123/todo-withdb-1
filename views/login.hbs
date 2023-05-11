@@ -1,0 +1,29 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div>
+      {{! get request for particular user(if exists) }}
+      <form action="/user/getUser" method="post" class="loginForm">
+
+        <div class="formdiv">
+          <div class="logintitle">Login Below</div>
+          <div class="inputfield">
+            <input type="text" placeholder="Enter Username: " name="username" />
+            <input
+              type="password"
+              placeholder="Enter Password: "
+              name="password"
+            />
+          </div>
+          <button type="submit" class="loginbtn">Login</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
