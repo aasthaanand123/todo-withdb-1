@@ -54,7 +54,7 @@ ul {
 
 .deleteUpdate {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   margin-bottom: 9px;
   padding-bottom: 7px;
@@ -64,6 +64,7 @@ ul {
 .delete {
   /* background-color: black; */
   color: white;
+  margin-right: 7px;
 }
 .update {
   /* background-color: black; */
@@ -91,14 +92,15 @@ div input {
   font-size: 19px;
   display: flex;
   flex-direction: column;
+  width: 85%;
 }
 .eachPost {
   background-color: black;
   color: white;
-  padding: 8px 7px;
+  padding: 8px 10px;
 }
 .ul_post {
-  width: 25%;
+  width: 28%;
 }
 .postWithCom {
   background-color: bisque;

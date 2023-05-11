@@ -17,11 +17,13 @@
           <input type="hidden" value="{{post._id}}" name="id" />
           <button type="submit">Submit</button>
         </form>
-        <ul class="comment">
-          {{#each post.comments as |comment|}}
-            <li>{{comment}}</li>
-          {{/each}}
-        </ul>
+        {{#if post.comments}}
+          <ul class="comment">
+            {{#each post.comments as |comment|}}
+              <li>{{comment}}</li>
+            {{/each}}
+          </ul>
+        {{/if}}
       </div>
     </div>
   </body>

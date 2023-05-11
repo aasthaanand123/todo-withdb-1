@@ -71,10 +71,18 @@ module.exports.openPost = async (req, res) => {
 module.exports.submitComment = async (req, res) => {
   try {
     let { comment, id } = req.body;
-    let post = await Dbclass.postComment(comment, id);
-    res.render("FullpgWithComments", {
-      post,
-    });
+    if (comment) {
+      let post = await Dbclass.postComment(comment, id);
+      res.render("FullpgWithComments", {
+        post,
+      });
+    } else {
+      //if input comment is empty then simply render the page as is without adding an empty comment in the array and page
+      let data = await Dbclass.getPost(id);
+      res.render("FullpgWithComments", {
+        post: data,
+      });
+    }
   } catch (err) {
     console.log(err);
   }

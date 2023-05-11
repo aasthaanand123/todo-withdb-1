@@ -90,7 +90,6 @@ class Dbclass {
       let db = getDb().collection(collectionName);
       try {
         let post = await db.findOne({ _id: new ObjectId(id) });
-        console.log(post);
         let comments; //returns an obj
         if (post.comments == null || typeof post.comments == "number") {
           comments = [comment]; //if no element add el
@@ -113,7 +112,6 @@ class Dbclass {
           //if already element, push new element
         }
         let d = await db.findOne({ _id: new ObjectId(id) });
-        console.log(d);
         res(d);
       } catch (err) {
         console.log(err);
