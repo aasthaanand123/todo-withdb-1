@@ -16,4 +16,5 @@ router.get("/updatePost", postController.getUpdatePost);
 router.post("/updatePost", postController.postUpdatePost);
 router.get("/openPost", postController.openPost);
 router.post("/submitComment", postController.submitComment);
+router.get("/openNextPost", postController.openNextPost);
 module.exports = router;

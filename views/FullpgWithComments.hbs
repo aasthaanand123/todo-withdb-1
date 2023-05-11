@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
+    {{! back button to go to homepage }}
+    <div class="arrow"><a href="/post/posts">⬅️</a></div>
     <div class="postWithCom">
-      <div>Title: {{post.title}}</div>
+      <div class="title">Title: {{post.title}}</div>
       <img src="{{post.imageUrl}}" alt="image" />
       <div>Description: {{post.description}}</div>
       <div class="comments">
@@ -26,5 +28,8 @@
         {{/if}}
       </div>
     </div>
+    <div class="arrowTwo"><a
+        href="/post/openNextPost?id={{post._id}}"
+      >➡️</a></div>
   </body>
 </html>

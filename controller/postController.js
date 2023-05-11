@@ -87,3 +87,18 @@ module.exports.submitComment = async (req, res) => {
     console.log(err);
   }
 };
+module.exports.openNextPost = async (req, res) => {
+  try {
+    let id = req.query.id; //of current post
+    let post = await Dbclass.nextPost(id);
+    if (post) {
+      res.render("FullpgWithComments", {
+        post,
+      });
+    } else {
+      res.redirect("/post/posts");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};

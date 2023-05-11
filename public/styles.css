@@ -146,3 +146,22 @@ div input {
   color: white;
   padding: 4px;
 }
+.postWithCom {
+  position: relative;
+}
+.arrow {
+  width: 5%;
+  position: absolute;
+  top: 22%;
+  left: 30%;
+  z-index: 3;
+}
+.arrowTwo {
+  position: absolute;
+  top: 22%;
+  right: 30%;
+}
+body {
+  overflow-x: hidden;
+  /* for now for styling purposes */
+}

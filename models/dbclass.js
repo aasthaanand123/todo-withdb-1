@@ -118,5 +118,26 @@ class Dbclass {
       }
     });
   }
+  static nextPost(id) {
+    return new Promise(async (res, rej) => {
+      try {
+        let db = await getDb().collection(collectionName).find({}).toArray(); //get complete db
+        //get the next post
+        //after getting the db iterate through find
+        let post;
+        let i;
+        let newId = new ObjectId(id);
+        for (i = 0; i < db.length; i++) {
+          if (db[i]._id == id) {
+            post = db[i + 1]; //an object
+            break;
+          }
+        }
+        res(post);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+  }
 }
 module.exports.Dbclass = Dbclass;
