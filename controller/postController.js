@@ -1,7 +1,8 @@
-const { Dbclass } = require("../models/dbclass");
+const usersDb = require("../models/databaseUsers");
+
 module.exports.getPost = async (req, res) => {
   try {
-    let data = await Dbclass.getPosts();
+    let data = await usersDb.getPosts();
     res.render("posts", {
       posts: data,
     });
@@ -13,23 +14,24 @@ module.exports.getPost = async (req, res) => {
 module.exports.getAddPost = (req, res) => {
   res.render("addPostform");
 };
-module.exports.postAddPost = (req, res) => {
+module.exports.postAddPost = async (req, res) => {
   //first add the post
   let { title, imageUrl, description } = req.body;
-  //add data to database
-  let newPost = new Dbclass(title, imageUrl, description);
-  newPost
-    .save()
-    .then((data) => {
-      res.redirect("/post");
-    })
-    .catch((Er) => {
-      console.log(Er);
+  try {
+    //fetch active user
+    let user = await usersDb.fetchActive(); //returns active user array
+    //on that id add a post
+    let posts = await usersDb.addPostOnId(user._id);
+    res.render("posts", {
+      posts,
     });
+  } catch (err) {
+    console.log(err);
+  }
 };
 module.exports.getDeletePost = async (req, res) => {
-  let id = req.query.id;
-  let data = await Dbclass.deletePost(id);
+  let id = req.query.id; //post id
+  let data = await usersDb.DeletepostOfActive(id);
   res.render("posts", {
     posts: data,
   });
@@ -37,7 +39,16 @@ module.exports.getDeletePost = async (req, res) => {
 module.exports.getUpdatePost = async (req, res) => {
   try {
     let id = req.query.id;
-    let data = await Dbclass.getPost(id);
+    let user = await usersDb.fetchActive(); //fetch active user
+    //find post that matches id
+    let data;
+    //user.posts is an array of objects
+    for (i = 0; i < user.posts.length; i++) {
+      if (user.posts[i]._id == id) {
+        data = user.posts[i];
+      }
+    }
+    //got the post
     res.render("updatePostform", {
       data,
     });
@@ -45,10 +56,14 @@ module.exports.getUpdatePost = async (req, res) => {
     console.log(err);
   }
 };
+
 module.exports.postUpdatePost = async (req, res) => {
   try {
     let obj = req.body;
-    let data = await Dbclass.updatePost(obj);
+    //with id
+    //1. fetch active user
+    //2. update the post (of given id) of the active user
+    let data = await usersDb.updatePost(obj); //bring the updated posts array
     res.render("posts", {
       posts: data,
     });
@@ -56,10 +71,11 @@ module.exports.postUpdatePost = async (req, res) => {
     console.log(err);
   }
 };
+
 module.exports.openPost = async (req, res) => {
   try {
     let id = req.query.id;
-    let post = await Dbclass.getPost(id);
+    let post = await usersDb.getPost(id);
 
     res.render("FullpgWithComments", {
       post,
@@ -72,7 +88,7 @@ module.exports.submitComment = async (req, res) => {
   try {
     let { comment, id } = req.body;
     if (comment) {
-      let post = await Dbclass.postComment(comment, id);
+      let post = await usersDb.postComment(comment, id); //returns updated post
       res.render("FullpgWithComments", {
         post,
       });
@@ -90,13 +106,13 @@ module.exports.submitComment = async (req, res) => {
 module.exports.openNextPost = async (req, res) => {
   try {
     let id = req.query.id; //of current post
-    let post = await Dbclass.nextPost(id);
+    let post = await usersDb.nextPost(id);
     if (post) {
       res.render("FullpgWithComments", {
         post,
       });
     } else {
-      res.redirect("/post/posts");
+      res.redirect("/user/posts");
     }
   } catch (err) {
     console.log(err);

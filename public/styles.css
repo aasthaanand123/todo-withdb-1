@@ -192,3 +192,17 @@ body {
 .formdiv {
   margin: 50px auto;
 }
+ul.dashboard {
+  flex-direction: column;
+  background-color: black;
+  color: white;
+  border: 3px solid white;
+}
+li span,
+.welcome {
+  font-size: 25px;
+  font-weight: 700;
+}
+ul div {
+  margin: 15px auto;
+}

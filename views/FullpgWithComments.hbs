@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
+
     {{! back button to go to homepage }}
-    <div class="arrow"><a href="/post/posts">⬅️</a></div>
+    <div class="arrow"><a href="/user/posts">⬅️</a></div>
     <div class="postWithCom">
       <div class="title">Title: {{post.title}}</div>
       <img src="{{post.imageUrl}}" alt="image" />
       <div>Description: {{post.description}}</div>
       <div class="comments">
-        <form action="/post/submitComment" method="post" class="commentForm">
+        <form action="/user/submitComment" method="post" class="commentForm">
           <input type="text" placeholder="Write a comment" name="comment" />
           <input type="hidden" value="{{post._id}}" name="id" />
           <button type="submit">Submit</button>
@@ -29,7 +30,7 @@
       </div>
     </div>
     <div class="arrowTwo"><a
-        href="/post/openNextPost?id={{post._id}}"
+        href="/user/openNextPost?id={{post._id}}"
       >➡️</a></div>
   </body>
 </html>

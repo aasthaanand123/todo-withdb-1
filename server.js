@@ -16,12 +16,12 @@ app.use(express.static(path.join(__dirname, "public"))); //only stylesheet
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 //feature of users not included in this branch of the project
-// app.get("/", (req, res) => {
-//   //first page that is loaded
-//   res.render("login");
-// });
+app.get("/", (req, res) => {
+  //first page that is loaded
+  res.render("login");
+});
 app.use("/post", postRouter);
-app.use("/users", userRouter);
+app.use("/user", userRouter);
 
 //when a connection with mongodb server is established then launch the nodejs server
 MongoConnected().then(() => {

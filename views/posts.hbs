@@ -15,14 +15,14 @@
         
         <div class="post">
             {{#each posts as |post|}}
-            <a href="/post/openPost?id={{post._id}}" class="eachPost">
+            <a href="/user/openPost?id={{post._id}}" class="eachPost">
             <li>Title: {{post.title}}</li>
             <img src="{{post.imageUrl}}" alt="image">
             <li class="description">Description: {{post.description}}</li>
             </a>
             <div class="deleteUpdate">
-            <a href="/post/deletePost?id={{post._id}}" class="delete">Delete Post</a>
-            <a href="/post/updatePost?id={{post._id}}" class="update">Update Post</a>
+            <a href="/user/deletePost?id={{post._id}}" class="delete">Delete Post</a>
+            <a href="/user/updatePost?id={{post._id}}" class="update">Update Post</a>
             </div>
             {{/each}}
 
